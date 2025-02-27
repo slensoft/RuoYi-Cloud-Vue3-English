@@ -1,3 +1,14 @@
+# RuoYi-Cloud-Vue3-English
+
+本仓库只是将
+[原仓库：RuoYi-Cloud-Vue3](https://github.com/yangzongzhuan/RuoYi-Cloud-Vue3)
+的相关中文版改成英文版。
+
+后端英文版请访问：
+[RuoYi-Cloud-English](https://github.com/slensoft/RuoYi-Cloud-English)
+
+---
+
 <p align="center">
 	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-b99b286755aef70355a7084753f89cdb7c9.png">
 </p>
