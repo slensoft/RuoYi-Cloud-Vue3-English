@@ -14,24 +14,24 @@
       class="upload-file-uploader"
       ref="fileUpload"
     >
-      <!-- 上传按钮 -->
-      <el-button type="primary">选取文件</el-button>
+      <!-- Upload Button -->
+      <el-button type="primary">Select File</el-button>  
     </el-upload>
-    <!-- 上传提示 -->
+    <!-- Upload Tip -->
     <div class="el-upload__tip" v-if="showTip">
-      请上传
-      <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
-      <template v-if="fileType"> 格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b> </template>
-      的文件
+      Please upload
+      <template v-if="fileSize"> files not exceeding <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
+      <template v-if="fileType"> files in <b style="color: #f56c6c">{{ fileType.join("/") }}</b> format </template>
+      files
     </div>
-    <!-- 文件列表 -->
+    <!-- File List -->
     <transition-group class="upload-file-list el-upload-list el-upload-list--text" name="el-fade-in-linear" tag="ul">
       <li :key="file.uid" class="el-upload-list__item ele-upload-list__item-content" v-for="(file, index) in fileList">
         <el-link :href="file.url" :underline="false" target="_blank">
           <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
         </el-link>
         <div class="ele-upload-list__item-content-action">
-          <el-link :underline="false" @click="handleDelete(index)" type="danger">删除</el-link>
+          <el-link :underline="false" @click="handleDelete(index)" type="danger">Delete</el-link>
         </div>
       </li>
     </transition-group>
@@ -43,22 +43,22 @@ import { getToken } from "@/utils/auth";
 
 const props = defineProps({
   modelValue: [String, Object, Array],
-  // 数量限制
+  // Quantity Limit
   limit: {
     type: Number,
     default: 5,
   },
-  // 大小限制(MB)
+  // Size Limit (MB)
   fileSize: {
     type: Number,
     default: 5,
   },
-  // 文件类型, 例如['png', 'jpg', 'jpeg']
+  // File Types, e.g., ['png', 'jpg', 'jpeg']
   fileType: {
     type: Array,
     default: () => ["doc", "xls", "ppt", "txt", "pdf"],
   },
-  // 是否显示提示
+  // Show Tip
   isShowTip: {
     type: Boolean,
     default: true
@@ -69,7 +69,7 @@ const { proxy } = getCurrentInstance();
 const emit = defineEmits();
 const number = ref(0);
 const uploadList = ref([]);
-const uploadFileUrl = ref(import.meta.env.VITE_APP_BASE_API + "/file/upload"); // 上传文件服务器地址
+const uploadFileUrl = ref(import.meta.env.VITE_APP_BASE_API + "/file/upload"); // Upload File Server Address
 const headers = ref({ Authorization: "Bearer " + getToken() });
 const fileList = ref([]);
 const showTip = computed(
@@ -79,9 +79,9 @@ const showTip = computed(
 watch(() => props.modelValue, val => {
   if (val) {
     let temp = 1;
-    // 首先将值转为数组
+    // First convert the value to an array
     const list = Array.isArray(val) ? val : props.modelValue.split(',');
-    // 然后将数组转为对象数组
+    // Then convert the array to an array of objects
     fileList.value = list.map(item => {
       if (typeof item === "string") {
         item = { name: item, url: item };
@@ -95,47 +95,47 @@ watch(() => props.modelValue, val => {
   }
 },{ deep: true, immediate: true });
 
-// 上传前校检格式和大小
+// Check format and size before upload
 function handleBeforeUpload(file) {
-  // 校检文件类型
+  // Check file type
   if (props.fileType.length) {
     const fileName = file.name.split('.');
     const fileExt = fileName[fileName.length - 1];
     const isTypeOk = props.fileType.indexOf(fileExt) >= 0;
     if (!isTypeOk) {
-      proxy.$modal.msgError(`文件格式不正确，请上传${props.fileType.join("/")}格式文件!`);
+      proxy.$modal.msgError(`The file format is incorrect, please upload a file in the ${props.fileType.join("/")} format!`);
       return false;
     }
   }
-  // 校检文件名是否包含特殊字符
+  // Check if the file name contains special characters
   if (file.name.includes(',')) {
-    proxy.$modal.msgError('文件名不正确，不能包含英文逗号!');
+    proxy.$modal.msgError('The file name is incorrect, it cannot contain English commas!');
     return false;
   }
-  // 校检文件大小
+  // Check file size
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize;
     if (!isLt) {
-      proxy.$modal.msgError(`上传文件大小不能超过 ${props.fileSize} MB!`);
+      proxy.$modal.msgError(`The file size cannot exceed ${props.fileSize} MB!`);
       return false;
     }
   }
-  proxy.$modal.loading("正在上传文件，请稍候...");
+  proxy.$modal.loading("Uploading file, please wait...");
   number.value++;
   return true;
 }
 
-// 文件个数超出
+// File count exceeded
 function handleExceed() {
-  proxy.$modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`);
+  proxy.$modal.msgError(`The number of uploaded files cannot exceed ${props.limit}!`);
 }
 
-// 上传失败
+// Upload failed
 function handleUploadError(err) {
-  proxy.$modal.msgError("上传文件失败");
+  proxy.$modal.msgError("Upload file failed");
 }
 
-// 上传成功回调
+// Upload success callback
 function handleUploadSuccess(res, file) {
   if (res.code === 200) {
     uploadList.value.push({ name: res.data.url, url: res.data.url });
@@ -149,13 +149,13 @@ function handleUploadSuccess(res, file) {
   }
 }
 
-// 删除文件
+// Delete file
 function handleDelete(index) {
   fileList.value.splice(index, 1);
   emit("update:modelValue", listToString(fileList.value));
 }
 
-// 上传结束处理
+// Handle end of upload
 function uploadedSuccessfully() {
   if (number.value > 0 && uploadList.value.length === number.value) {
     fileList.value = fileList.value.filter(f => f.url !== undefined).concat(uploadList.value);
@@ -166,9 +166,9 @@ function uploadedSuccessfully() {
   }
 }
 
-// 获取文件名称
+// Get file name
 function getFileName(name) {
-  // 如果是url那么取最后的名字 如果不是直接返回
+  // If it's a URL, take the last name; otherwise, return directly
   if (name.lastIndexOf("/") > -1) {
     return name.slice(name.lastIndexOf("/") + 1);
   } else {
@@ -176,7 +176,7 @@ function getFileName(name) {
   }
 }
 
-// 对象转成指定字符串分隔
+// Convert object to specified string separator
 function listToString(list, separator) {
   let strs = "";
   separator = separator || ",";

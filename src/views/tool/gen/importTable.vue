@@ -1,37 +1,37 @@
 <template>
-  <!-- 导入表 -->
-  <el-dialog title="导入表" v-model="visible" width="800px" top="5vh" append-to-body>
+  <!-- Import Table -->
+  <el-dialog title="Import Table" v-model="visible" width="800px" top="5vh" append-to-body>
     <el-form :model="queryParams" ref="queryRef" :inline="true">
-      <el-form-item label="表名称" prop="tableName">
+      <el-form-item label="Table Name" prop="tableName">
         <el-input
           v-model="queryParams.tableName"
-          placeholder="请输入表名称"
+          placeholder="Please enter table name"
           clearable
           style="width: 180px"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="表描述" prop="tableComment">
+      <el-form-item label="Table Description" prop="tableComment">
         <el-input
           v-model="queryParams.tableComment"
-          placeholder="请输入表描述"
+          placeholder="Please enter table description"
           clearable
           style="width: 180px"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-        <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery">Search</el-button>
+        <el-button icon="Refresh" @click="resetQuery">Reset</el-button>
       </el-form-item>
     </el-form>
     <el-row>
       <el-table @row-click="clickRow" ref="table" :data="dbTableList" @selection-change="handleSelectionChange" height="260px">
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="tableName" label="表名称" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column prop="tableComment" label="表描述" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column prop="createTime" label="创建时间"></el-table-column>
-        <el-table-column prop="updateTime" label="更新时间"></el-table-column>
+        <el-table-column prop="tableName" label="Table Name" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="tableComment" label="Table Description" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="createTime" label="Create Time"></el-table-column>
+        <el-table-column prop="updateTime" label="Update Time"></el-table-column>
       </el-table>
       <pagination
         v-show="total>0"
@@ -43,8 +43,8 @@
     </el-row>
     <template #footer>
       <div class="dialog-footer">
-        <el-button type="primary" @click="handleImportTable">确 定</el-button>
-        <el-button @click="visible = false">取 消</el-button>
+        <el-button type="primary" @click="handleImportTable">Confirm</el-button>
+        <el-button @click="visible = false">Cancel</el-button>
       </div>
     </template>
   </el-dialog>
@@ -68,23 +68,23 @@ const queryParams = reactive({
 
 const emit = defineEmits(["ok"]);
 
-/** 查询参数列表 */
+/** Query parameter list */
 function show() {
   getList();
   visible.value = true;
 }
 
-/** 单击选择行 */
+/** Click to select row */
 function clickRow(row) {
   proxy.$refs.table.toggleRowSelection(row);
 }
 
-/** 多选框选中数据 */
+/** Multiple selection change */
 function handleSelectionChange(selection) {
   tables.value = selection.map(item => item.tableName);
 }
 
-/** 查询表数据 */
+/** Query table data */
 function getList() {
   listDbTable(queryParams).then(res => {
     dbTableList.value = res.rows;
@@ -92,23 +92,23 @@ function getList() {
   });
 }
 
-/** 搜索按钮操作 */
+/** Search button operation */
 function handleQuery() {
   queryParams.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** Reset button operation */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 
-/** 导入按钮操作 */
+/** Import button operation */
 function handleImportTable() {
   const tableNames = tables.value.join(",");
   if (tableNames == "") {
-    proxy.$modal.msgError("请选择要导入的表");
+    proxy.$modal.msgError("Please select tables to import");
     return;
   }
   importTable({ tables: tableNames }).then(res => {

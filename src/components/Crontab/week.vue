@@ -2,19 +2,19 @@
     <el-form>
         <el-form-item>
             <el-radio v-model='radioValue' :value="1">
-                周，允许的通配符[, - * ? / L #]
+                Week, allowed wildcards [, - * ? / L #]
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="2">
-                不指定
+              Not specified
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="3">
-                周期从
+                Period from
                 <el-select clearable v-model="cycle01">
                     <el-option
                         v-for="(item,index) of weekList"
@@ -39,8 +39,8 @@
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="4">
-                第
-                <el-input-number v-model='average01' :min="1" :max="4" /> 周的
+                The
+                <el-input-number v-model='average01' :min="1" :max="4" /> week of
                 <el-select clearable v-model="average02">
                     <el-option v-for="item in weekList" :key="item.key" :label="item.value" :value="item.key" />
                 </el-select>
@@ -49,7 +49,7 @@
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="5">
-                本月最后一个
+              Last of the month
                 <el-select clearable v-model="weekday">
                     <el-option v-for="item in weekList" :key="item.key" :label="item.value" :value="item.key" />
                 </el-select>
@@ -58,8 +58,8 @@
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="6">
-                指定
-                <el-select class="multiselect" clearable v-model="checkboxList" placeholder="可多选" multiple :multiple-limit="6">
+                Specify
+                <el-select class="multiselect" clearable v-model="checkboxList" placeholder="Multiple selection available" multiple :multiple-limit="6">
                     <el-option v-for="item in weekList" :key="item.key" :label="item.value" :value="item.key" />
                 </el-select>
             </el-radio>
@@ -98,13 +98,13 @@ const weekday = ref(2)
 const checkboxList = ref([])
 const checkCopy = ref([2])
 const weekList = ref([
-    {key: 1, value: '星期日'},
-    {key: 2, value: '星期一'},
-    {key: 3, value: '星期二'},
-    {key: 4, value: '星期三'},
-    {key: 5, value: '星期四'},
-    {key: 6, value: '星期五'},
-    {key: 7, value: '星期六'}
+    {key: 1, value: 'Sunday'},
+    {key: 2, value: 'Monday'},
+    {key: 3, value: 'Saturday'},
+    {key: 4, value: 'Wednesday'},
+    {key: 5, value: 'Thursday'},
+    {key: 6, value: 'Friday'},
+    {key: 7, value: 'Saturday'}
 ])
 const cycleTotal = computed(() => {
     cycle01.value = props.check(cycle01.value, 1, 6)

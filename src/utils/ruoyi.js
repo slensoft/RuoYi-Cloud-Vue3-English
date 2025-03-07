@@ -1,11 +1,9 @@
-
-
 /**
- * 通用js方法封装处理
+ * Common JavaScript method encapsulation
  * Copyright (c) 2019 ruoyi
  */
 
-// 日期格式化
+// Date formatting
 export function parseTime(time, pattern) {
   if (arguments.length === 0 || !time) {
     return null
@@ -37,7 +35,7 @@ export function parseTime(time, pattern) {
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') { return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][value] }
     if (result.length > 0 && value < 10) {
       value = '0' + value
     }
@@ -46,14 +44,14 @@ export function parseTime(time, pattern) {
   return time_str
 }
 
-// 表单重置
+// Form reset
 export function resetForm(refName) {
   if (this.$refs[refName]) {
     this.$refs[refName].resetFields();
   }
 }
 
-// 添加日期范围
+// Add date range
 export function addDateRange(params, dateRange, propName) {
   let search = params;
   search.params = typeof (search.params) === 'object' && search.params !== null && !Array.isArray(search.params) ? search.params : {};
@@ -68,7 +66,7 @@ export function addDateRange(params, dateRange, propName) {
   return search;
 }
 
-// 回显数据字典
+// Display dictionary data
 export function selectDictLabel(datas, value) {
   if (value === undefined) {
     return "";
@@ -86,7 +84,7 @@ export function selectDictLabel(datas, value) {
   return actions.join('');
 }
 
-// 回显数据字典（字符串数组）
+// Display dictionary data (string array)
 export function selectDictLabels(datas, value, separator) {
   if (value === undefined || value.length ===0) {
     return "";
@@ -112,7 +110,7 @@ export function selectDictLabels(datas, value, separator) {
   return actions.join('').substring(0, actions.join('').length - 1);
 }
 
-// 字符串格式化(%s )
+// String formatting (%s)
 export function sprintf(str) {
   var args = arguments, flag = true, i = 1;
   str = str.replace(/%s/g, function () {
@@ -126,7 +124,7 @@ export function sprintf(str) {
   return flag ? str : '';
 }
 
-// 转换字符串，undefined,null等转化为""
+// Convert string, undefined, null to empty string
 export function parseStrEmpty(str) {
   if (!str || str == "undefined" || str == "null") {
     return "";
@@ -134,7 +132,7 @@ export function parseStrEmpty(str) {
   return str;
 }
 
-// 数据合并
+// Data merge
 export function mergeRecursive(source, target) {
   for (var p in target) {
     try {
@@ -151,11 +149,11 @@ export function mergeRecursive(source, target) {
 };
 
 /**
- * 构造树型结构数据
- * @param {*} data 数据源
- * @param {*} id id字段 默认 'id'
- * @param {*} parentId 父节点字段 默认 'parentId'
- * @param {*} children 孩子节点字段 默认 'children'
+ * Construct tree structure data
+ * @param {*} data Data source
+ * @param {*} id ID field, default 'id'
+ * @param {*} parentId Parent node field, default 'parentId'
+ * @param {*} children Children node field, default 'children'
  */
 export function handleTree(data, id, parentId, children) {
   let config = {
@@ -202,8 +200,8 @@ export function handleTree(data, id, parentId, children) {
 }
 
 /**
-* 参数处理
-* @param {*} params  参数
+* Parameter processing
+* @param {*} params Parameters
 */
 export function tansParams(params) {
   let result = ''
@@ -227,8 +225,7 @@ export function tansParams(params) {
   return result
 }
 
-
-// 返回项目路径
+// Return project path
 export function getNormalPath(p) {
   if (p.length === 0 || !p || p == 'undefined') {
     return p
@@ -240,7 +237,7 @@ export function getNormalPath(p) {
   return res;
 }
 
-// 验证是否为blob格式
+// Validate if data is in blob format
 export function blobValidate(data) {
   return data.type !== 'application/json'
 }

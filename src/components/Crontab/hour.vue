@@ -2,30 +2,30 @@
     <el-form>
         <el-form-item>
             <el-radio v-model='radioValue' :value="1">
-                小时，允许的通配符[, - * /]
+                Hour, allowed wildcards [, - * /]
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="2">
-                周期从
+                Period from
                 <el-input-number v-model='cycle01' :min="0" :max="22" /> -
-                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="23" /> 时
+                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="23" /> hour
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="3">
-                从
-                <el-input-number v-model='average01' :min="0" :max="22" /> 时开始，每
-                <el-input-number v-model='average02' :min="1" :max="23 - average01" /> 小时执行一次
+                From
+                <el-input-number v-model='average01' :min="0" :max="22" /> hour start, execute every
+                <el-input-number v-model='average02' :min="1" :max="23 - average01" /> hour
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="4">
-                指定
-                <el-select clearable v-model="checkboxList" placeholder="可多选" multiple :multiple-limit="10">
+                Specify
+                <el-select clearable v-model="checkboxList" placeholder="Multiple selection available" multiple :multiple-limit="10">
                     <el-option v-for="item in 24" :key="item" :label="item - 1" :value="item - 1" />
                 </el-select>
             </el-radio>

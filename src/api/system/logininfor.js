@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询登录日志列表
+// Query login log list
 export function list(query) {
   return request({
     url: '/system/logininfor/list',
@@ -9,7 +9,7 @@ export function list(query) {
   })
 }
 
-// 删除登录日志
+// Delete login log
 export function delLogininfor(infoId) {
   return request({
     url: '/system/logininfor/' + infoId,
@@ -17,14 +17,15 @@ export function delLogininfor(infoId) {
   })
 }
 
-// 解锁用户登录状态
+// Unlock user login status
 export function unlockLogininfor(userName) {
   return request({
     url: '/system/logininfor/unlock/' + userName,
     method: 'get'
   })
 }
-// 清空登录日志
+
+// Clear login logs
 export function cleanLogininfor() {
   return request({
     url: '/system/logininfor/clean',

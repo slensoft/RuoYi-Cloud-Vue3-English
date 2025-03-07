@@ -19,21 +19,21 @@
     >
       <el-icon class="avatar-uploader-icon"><plus /></el-icon>
     </el-upload>
-    <!-- 上传提示 -->
+    <!-- Upload Tip -->
     <div class="el-upload__tip" v-if="showTip">
-      请上传
+      Please upload
       <template v-if="fileSize">
-        大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b>
+        Size not exceeding <b style="color: #f56c6c">{{ fileSize }}MB</b>
       </template>
       <template v-if="fileType">
-        格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b>
+        Format as <b style="color: #f56c6c">{{ fileType.join("/") }}</b>
       </template>
-      的文件
+      files
     </div>
 
     <el-dialog
       v-model="dialogVisible"
-      title="预览"
+      title="Preview"
       width="800px"
       append-to-body
     >
@@ -50,22 +50,22 @@ import { getToken } from "@/utils/auth";
 
 const props = defineProps({
   modelValue: [String, Object, Array],
-  // 图片数量限制
+  // Image Quantity Limit
   limit: {
     type: Number,
     default: 5,
   },
-  // 大小限制(MB)
+  // Size Limit (MB)
   fileSize: {
     type: Number,
     default: 5,
   },
-  // 文件类型, 例如['png', 'jpg', 'jpeg']
+  // File Types, e.g., ['png', 'jpg', 'jpeg']
   fileType: {
     type: Array,
     default: () => ["png", "jpg", "jpeg"],
   },
-  // 是否显示提示
+  // Show Tip
   isShowTip: {
     type: Boolean,
     default: true
@@ -79,7 +79,7 @@ const uploadList = ref([]);
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 const baseUrl = import.meta.env.VITE_APP_BASE_API;
-const uploadImgUrl = ref(import.meta.env.VITE_APP_BASE_API + "/file/upload"); // 上传的图片服务器地址
+const uploadImgUrl = ref(import.meta.env.VITE_APP_BASE_API + "/file/upload"); // Upload Image Server Address
 const headers = ref({ Authorization: "Bearer " + getToken() });
 const fileList = ref([]);
 const showTip = computed(
@@ -88,9 +88,9 @@ const showTip = computed(
 
 watch(() => props.modelValue, val => {
   if (val) {
-    // 首先将值转为数组
+    // First convert the value to an array
     const list = Array.isArray(val) ? val : props.modelValue.split(",");
-    // 然后将数组转为对象数组
+    // Then convert the array to an array of objects
     fileList.value = list.map(item => {
       if (typeof item === "string") {
         item = { name: item, url: item };
@@ -103,7 +103,7 @@ watch(() => props.modelValue, val => {
   }
 },{ deep: true, immediate: true });
 
-// 上传前loading加载
+// Loading before upload
 function handleBeforeUpload(file) {
   let isImg = false;
   if (props.fileType.length) {
@@ -120,30 +120,30 @@ function handleBeforeUpload(file) {
     isImg = file.type.indexOf("image") > -1;
   }
   if (!isImg) {
-    proxy.$modal.msgError(`文件格式不正确，请上传${props.fileType.join("/")}图片格式文件!`);
+    proxy.$modal.msgError(`The file format is incorrect, please upload a file in the ${props.fileType.join("/")} format!`);
     return false;
   }
   if (file.name.includes(',')) {
-    proxy.$modal.msgError('文件名不正确，不能包含英文逗号!');
+    proxy.$modal.msgError('The file name is incorrect, it cannot contain English commas!');
     return false;
   }
   if (props.fileSize) {
     const isLt = file.size / 1024 / 1024 < props.fileSize;
     if (!isLt) {
-      proxy.$modal.msgError(`上传头像图片大小不能超过 ${props.fileSize} MB!`);
+      proxy.$modal.msgError(`The file size cannot exceed ${props.fileSize} MB!`);
       return false;
     }
   }
-  proxy.$modal.loading("正在上传图片，请稍候...");
+  proxy.$modal.loading("Uploading image, please wait...");
   number.value++;
 }
 
-// 文件个数超出
+// File count exceeded
 function handleExceed() {
-  proxy.$modal.msgError(`上传文件数量不能超过 ${props.limit} 个!`);
+  proxy.$modal.msgError(`The number of uploaded files cannot exceed ${props.limit}!`);
 }
 
-// 上传成功回调
+// Upload success callback
 function handleUploadSuccess(res, file) {
   if (res.code === 200) {
     uploadList.value.push({ name: res.data.url, url: res.data.url });
@@ -157,7 +157,7 @@ function handleUploadSuccess(res, file) {
   }
 }
 
-// 删除图片
+// Delete image
 function handleDelete(file) {
   const findex = fileList.value.map(f => f.name).indexOf(file.name);
   if (findex > -1 && uploadList.value.length === number.value) {
@@ -167,7 +167,7 @@ function handleDelete(file) {
   }
 }
 
-// 上传结束处理
+// Handle end of upload
 function uploadedSuccessfully() {
   if (number.value > 0 && uploadList.value.length === number.value) {
     fileList.value = fileList.value.filter(f => f.url !== undefined).concat(uploadList.value);
@@ -178,19 +178,19 @@ function uploadedSuccessfully() {
   }
 }
 
-// 上传失败
+// Upload failed
 function handleUploadError() {
-  proxy.$modal.msgError("上传图片失败");
+  proxy.$modal.msgError("Upload image failed");
   proxy.$modal.closeLoading();
 }
 
-// 预览
+// Preview
 function handlePictureCardPreview(file) {
   dialogImageUrl.value = file.url;
   dialogVisible.value = true;
 }
 
-// 对象转成指定字符串分隔
+// Convert object to specified string separator
 function listToString(list, separator) {
   let strs = "";
   separator = separator || ",";
@@ -204,7 +204,7 @@ function listToString(list, separator) {
 </script>
 
 <style scoped lang="scss">
-// .el-upload--picture-card 控制加号部分
+// .el-upload--picture-card controls the plus part
 :deep(.hide .el-upload--picture-card) {
     display: none;
 }

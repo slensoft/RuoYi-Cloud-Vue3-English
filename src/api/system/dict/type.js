@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询字典类型列表
+// Query dictionary type list
 export function listType(query) {
   return request({
     url: '/system/dict/type/list',
@@ -9,7 +9,7 @@ export function listType(query) {
   })
 }
 
-// 查询字典类型详细
+// Get dictionary type details
 export function getType(dictId) {
   return request({
     url: '/system/dict/type/' + dictId,
@@ -17,7 +17,7 @@ export function getType(dictId) {
   })
 }
 
-// 新增字典类型
+// Add dictionary type
 export function addType(data) {
   return request({
     url: '/system/dict/type',
@@ -26,7 +26,7 @@ export function addType(data) {
   })
 }
 
-// 修改字典类型
+// Update dictionary type
 export function updateType(data) {
   return request({
     url: '/system/dict/type',
@@ -35,7 +35,7 @@ export function updateType(data) {
   })
 }
 
-// 删除字典类型
+// Delete dictionary type
 export function delType(dictId) {
   return request({
     url: '/system/dict/type/' + dictId,
@@ -43,7 +43,7 @@ export function delType(dictId) {
   })
 }
 
-// 刷新字典缓存
+// Refresh dictionary cache
 export function refreshCache() {
   return request({
     url: '/system/dict/type/refreshCache',
@@ -51,7 +51,7 @@ export function refreshCache() {
   })
 }
 
-// 获取字典选择框列表
+// Get dictionary select list
 export function optionselect() {
   return request({
     url: '/system/dict/type/optionselect',

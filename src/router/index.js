@@ -3,28 +3,28 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Layout from '@/layout'
 
 /**
- * Note: 路由配置项
+ * Note: Route configuration items
  *
- * hidden: true                     // 当设置 true 的时候该路由不会再侧边栏出现 如401，login等页面，或者如一些编辑页面/edit/1
- * alwaysShow: true                 // 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面
- *                                  // 只有一个时，会将那个子路由当做根路由显示在侧边栏--如引导页面
- *                                  // 若你想不管路由下面的 children 声明的个数都显示你的根路由
- *                                  // 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
- * redirect: noRedirect             // 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
- * name:'router-name'               // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
- * query: '{"id": 1, "name": "ry"}' // 访问路由的默认传递参数
- * roles: ['admin', 'common']       // 访问路由的角色权限
- * permissions: ['a:a:a', 'b:b:b']  // 访问路由的菜单权限
+ * hidden: true                     // When set to true, this route will not appear in the sidebar, such as 401, login pages, or some edit pages like /edit/1
+ * alwaysShow: true                 // When there are more than one declared routes under a route's children, it will automatically become a nested mode, like component pages
+ *                                  // When there is only one, it will treat that child route as the root route displayed in the sidebar, like the guide page
+ *                                  // If you want to always display your root route regardless of the number of children declared under the route
+ *                                  // You can set alwaysShow: true, so it will ignore the previously defined rules and always display the root route
+ * redirect: noRedirect             // When noRedirect is set, this route cannot be clicked in the breadcrumb navigation
+ * name:'router-name'               // Set the name of the route, it must be filled in, otherwise various problems will occur when using <keep-alive>
+ * query: '{"id": 1, "name": "ry"}' // Default parameters passed when accessing the route
+ * roles: ['admin', 'common']       // Role permissions for accessing the route
+ * permissions: ['a:a:a', 'b:b:b']  // Menu permissions for accessing the route
  * meta : {
-    noCache: true                   // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
-    title: 'title'                  // 设置该路由在侧边栏和面包屑中展示的名字
-    icon: 'svg-name'                // 设置该路由的图标，对应路径src/assets/icons/svg
-    breadcrumb: false               // 如果设置为false，则不会在breadcrumb面包屑中显示
-    activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
+    noCache: true                   // If set to true, it will not be cached by <keep-alive> (default is false)
+    title: 'title'                  // Set the name displayed for this route in the sidebar and breadcrumb
+    icon: 'svg-name'                // Set the icon for this route, corresponding to the path src/assets/icons/svg
+    breadcrumb: false               // If set to false, it will not be displayed in the breadcrumb
+    activeMenu: '/system/user'      // When this attribute is set for the route, the corresponding sidebar will be highlighted.
   }
  */
 
-// 公共路由
+// Public routes
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -66,7 +66,7 @@ export const constantRoutes = [
         path: '/index',
         component: () => import('@/views/index'),
         name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        meta: { title: 'Home', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -80,13 +80,13 @@ export const constantRoutes = [
         path: 'profile',
         component: () => import('@/views/system/user/profile/index'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
+        meta: { title: 'Profile', icon: 'user' }
       }
     ]
   }
 ]
 
-// 动态路由，基于用户权限动态去加载
+// Dynamic routes, loaded dynamically based on user permissions
 export const dynamicRoutes = [
   {
     path: '/system/user-auth',
@@ -98,7 +98,7 @@ export const dynamicRoutes = [
         path: 'role/:userId(\\d+)',
         component: () => import('@/views/system/user/authRole'),
         name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
+        meta: { title: 'Assign Role', activeMenu: '/system/user' }
       }
     ]
   },
@@ -112,7 +112,7 @@ export const dynamicRoutes = [
         path: 'user/:roleId(\\d+)',
         component: () => import('@/views/system/role/authUser'),
         name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
+        meta: { title: 'Assign User', activeMenu: '/system/role' }
       }
     ]
   },
@@ -126,7 +126,7 @@ export const dynamicRoutes = [
         path: 'index/:dictId(\\d+)',
         component: () => import('@/views/system/dict/data'),
         name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
+        meta: { title: 'Dictionary Data', activeMenu: '/system/dict' }
       }
     ]
   },
@@ -140,7 +140,7 @@ export const dynamicRoutes = [
         path: 'index/:jobId(\\d+)',
         component: () => import('@/views/monitor/job/log'),
         name: 'JobLog',
-        meta: { title: '调度日志', activeMenu: '/monitor/job' }
+        meta: { title: 'Job Log', activeMenu: '/monitor/job' }
       }
     ]
   },
@@ -154,7 +154,7 @@ export const dynamicRoutes = [
         path: 'index/:tableId(\\d+)',
         component: () => import('@/views/tool/gen/editTable'),
         name: 'GenEdit',
-        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
+        meta: { title: 'Edit Generation Configuration', activeMenu: '/tool/gen' }
       }
     ]
   }

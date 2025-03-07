@@ -2,30 +2,30 @@
     <el-form>
         <el-form-item>
             <el-radio v-model='radioValue' :value="1">
-                秒，允许的通配符[, - * /]
+                Second, allowed wildcards [, - * /]
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="2">
-                周期从
+                Period from
                 <el-input-number v-model='cycle01' :min="0" :max="58" /> -
-                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="59" /> 秒
+                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="59" /> second
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="3">
-                从
-                <el-input-number v-model='average01' :min="0" :max="58" /> 秒开始，每
-                <el-input-number v-model='average02' :min="1" :max="59 - average01" /> 秒执行一次
+              From
+                <el-input-number v-model='average01' :min="0" :max="58" /> second start, every
+                <el-input-number v-model='average02' :min="1" :max="59 - average01" /> second
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="4">
-                指定
-                <el-select clearable v-model="checkboxList" placeholder="可多选" multiple :multiple-limit="10">
+                Specify
+                <el-select clearable v-model="checkboxList" placeholder="Multiple selection available" multiple :multiple-limit="10">
                     <el-option v-for="item in 60" :key="item" :label="item - 1" :value="item - 1" />
                 </el-select>
             </el-radio>
@@ -94,7 +94,7 @@ function changeRadioValue(value) {
         radioValue.value = 4
     }
 }
-// 单选按钮值变化时
+// When the radio button value changes
 function onRadioChange() {
     switch (radioValue.value) {
         case 1:

@@ -1,43 +1,43 @@
 <template>
-   <!-- 授权用户 -->
-   <el-dialog title="选择用户" v-model="visible" width="800px" top="5vh" append-to-body>
+   <!-- Authorize User -->
+   <el-dialog title="Select User" v-model="visible" width="800px" top="5vh" append-to-body>
       <el-form :model="queryParams" ref="queryRef" :inline="true">
-         <el-form-item label="用户名称" prop="userName">
+         <el-form-item label="Username" prop="userName">
             <el-input
                v-model="queryParams.userName"
-               placeholder="请输入用户名称"
+               placeholder="Please enter username"
                clearable
                style="width: 180px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="手机号码" prop="phonenumber">
+         <el-form-item label="Phone Number" prop="phonenumber">
             <el-input
                v-model="queryParams.phonenumber"
-               placeholder="请输入手机号码"
+               placeholder="Please enter phone number"
                clearable
                style="width: 180px"
                @keyup.enter="handleQuery"
             />
          </el-form-item>
          <el-form-item>
-            <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
-            <el-button icon="Refresh" @click="resetQuery">重置</el-button>
+            <el-button type="primary" icon="Search" @click="handleQuery">Search</el-button>
+            <el-button icon="Refresh" @click="resetQuery">Reset</el-button>
          </el-form-item>
       </el-form>
       <el-row>
          <el-table @row-click="clickRow" ref="refTable" :data="userList" @selection-change="handleSelectionChange" height="260px">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column label="用户名称" prop="userName" :show-overflow-tooltip="true" />
-            <el-table-column label="用户昵称" prop="nickName" :show-overflow-tooltip="true" />
-            <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
-            <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
-            <el-table-column label="状态" align="center" prop="status">
+            <el-table-column label="Username" prop="userName" :show-overflow-tooltip="true" />
+            <el-table-column label="Nickname" prop="nickName" :show-overflow-tooltip="true" />
+            <el-table-column label="Email" prop="email" :show-overflow-tooltip="true" />
+            <el-table-column label="Phone" prop="phonenumber" :show-overflow-tooltip="true" />
+            <el-table-column label="Status" align="center" prop="status">
                <template #default="scope">
                   <dict-tag :options="sys_normal_disable" :value="scope.row.status" />
                </template>
             </el-table-column>
-            <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+            <el-table-column label="Create Time" align="center" prop="createTime" width="180">
                <template #default="scope">
                   <span>{{ parseTime(scope.row.createTime) }}</span>
                </template>
@@ -53,8 +53,8 @@
       </el-row>
       <template #footer>
          <div class="dialog-footer">
-            <el-button type="primary" @click="handleSelectUser">确 定</el-button>
-            <el-button @click="visible = false">取 消</el-button>
+            <el-button type="primary" @click="handleSelectUser">Confirm</el-button>
+            <el-button @click="visible = false">Cancel</el-button>
          </div>
       </template>
    </el-dialog>
@@ -85,24 +85,24 @@ const queryParams = reactive({
   phonenumber: undefined
 });
 
-// 显示弹框
+// Show dialog
 function show() {
   queryParams.roleId = props.roleId;
   getList();
   visible.value = true;
 }
 
-/**选择行 */
+/** Select row */
 function clickRow(row) {
   proxy.$refs["refTable"].toggleRowSelection(row);
 }
 
-// 多选框选中数据
+// Multiple selection box data
 function handleSelectionChange(selection) {
   userIds.value = selection.map(item => item.userId);
 }
 
-// 查询表数据
+// Query table data
 function getList() {
   unallocatedUserList(queryParams).then(res => {
     userList.value = res.rows;
@@ -110,25 +110,25 @@ function getList() {
   });
 }
 
-/** 搜索按钮操作 */
+/** Search button operation */
 function handleQuery() {
   queryParams.pageNum = 1;
   getList();
 }
 
-/** 重置按钮操作 */
+/** Reset button operation */
 function resetQuery() {
   proxy.resetForm("queryRef");
   handleQuery();
 }
 
 const emit = defineEmits(["ok"]);
-/** 选择授权用户操作 */
+/** Select authorized user operation */
 function handleSelectUser() {
   const roleId = queryParams.roleId;
   const uIds = userIds.value.join(",");
   if (uIds == "") {
-    proxy.$modal.msgError("请选择要分配的用户");
+    proxy.$modal.msgError("Please select users to assign");
     return;
   }
   authUserSelectAll({ roleId: roleId, userIds: uIds }).then(res => {

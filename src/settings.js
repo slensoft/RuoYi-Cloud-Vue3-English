@@ -1,39 +1,39 @@
 export default {
   /**
-   * 网页标题
+   * Website Title
    */
   title: import.meta.env.VITE_APP_TITLE,
   /**
-   * 侧边栏主题 深色主题theme-dark，浅色主题theme-light
+   * Sidebar Theme: theme-dark or theme-light
    */
   sideTheme: 'theme-dark',
   /**
-   * 是否系统布局配置
+   * Whether to show system layout configuration
    */
   showSettings: true,
 
   /**
-   * 是否显示顶部导航
+   * Whether to show top navigation
    */
   topNav: false,
 
   /**
-   * 是否显示 tagsView
+   * Whether to show tagsView
    */
   tagsView: true,
 
   /**
-   * 是否固定头部
+   * Whether to fix header
    */
   fixedHeader: false,
 
   /**
-   * 是否显示logo
+   * Whether to show logo
    */
   sidebarLogo: true,
 
   /**
-   * 是否显示动态标题
+   * Whether to show dynamic title
    */
   dynamicTitle: false,
 

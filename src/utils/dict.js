@@ -2,7 +2,7 @@ import useDictStore from '@/store/modules/dict'
 import { getDicts } from '@/api/system/dict/data'
 
 /**
- * 获取字典数据
+ * Get dictionary data
  */
 export function useDict(...args) {
   const res = ref({});

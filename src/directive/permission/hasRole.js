@@ -1,5 +1,5 @@
- /**
- * v-hasRole 角色权限处理
+/**
+ * v-hasRole role permission handling
  * Copyright (c) 2019 ruoyi
  */
  
@@ -22,7 +22,7 @@ export default {
         el.parentNode && el.parentNode.removeChild(el)
       }
     } else {
-      throw new Error(`请设置角色权限标签值`)
+      throw new Error(`Please set the role permission tag value`)
     }
   }
 }

@@ -3,71 +3,71 @@ import { ElMessage, ElMessageBox, ElNotification, ElLoading } from 'element-plus
 let loadingInstance;
 
 export default {
-  // 消息提示
+  // Message prompt
   msg(content) {
     ElMessage.info(content)
   },
-  // 错误消息
+  // Error message
   msgError(content) {
     ElMessage.error(content)
   },
-  // 成功消息
+  // Success message
   msgSuccess(content) {
     ElMessage.success(content)
   },
-  // 警告消息
+  // Warning message
   msgWarning(content) {
     ElMessage.warning(content)
   },
-  // 弹出提示
+  // Popup prompt
   alert(content) {
-    ElMessageBox.alert(content, "系统提示")
+    ElMessageBox.alert(content, "System prompt")
   },
-  // 错误提示
+  // Error prompt
   alertError(content) {
-    ElMessageBox.alert(content, "系统提示", { type: 'error' })
+    ElMessageBox.alert(content, "System prompt", { type: 'error' })
   },
-  // 成功提示
+  // Success prompt
   alertSuccess(content) {
-    ElMessageBox.alert(content, "系统提示", { type: 'success' })
+    ElMessageBox.alert(content, "System prompt", { type: 'success' })
   },
-  // 警告提示
+  // Warning prompt
   alertWarning(content) {
-    ElMessageBox.alert(content, "系统提示", { type: 'warning' })
+    ElMessageBox.alert(content, "System prompt", { type: 'warning' })
   },
-  // 通知提示
+  // Notification prompt
   notify(content) {
     ElNotification.info(content)
   },
-  // 错误通知
+  // Error notification
   notifyError(content) {
     ElNotification.error(content);
   },
-  // 成功通知
+  // Success notification
   notifySuccess(content) {
     ElNotification.success(content)
   },
-  // 警告通知
+  // Warning notification
   notifyWarning(content) {
     ElNotification.warning(content)
   },
-  // 确认窗体
+  // Confirmation dialog
   confirm(content) {
-    return ElMessageBox.confirm(content, "系统提示", {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    return ElMessageBox.confirm(content, "System prompt", {
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
       type: "warning",
     })
   },
-  // 提交内容
+  // Submit content
   prompt(content) {
-    return ElMessageBox.prompt(content, "系统提示", {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    return ElMessageBox.prompt(content, "System prompt", {
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
       type: "warning",
     })
   },
-  // 打开遮罩层
+  // Open loading overlay
   loading(content) {
     loadingInstance = ElLoading.service({
       lock: true,
@@ -75,7 +75,7 @@ export default {
       background: "rgba(0, 0, 0, 0.7)",
     })
   },
-  // 关闭遮罩层
+  // Close loading overlay
   closeLoading() {
     loadingInstance.close();
   }

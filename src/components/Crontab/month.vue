@@ -2,30 +2,30 @@
     <el-form>
         <el-form-item>
             <el-radio v-model='radioValue' :value="1">
-                月，允许的通配符[, - * /]
+                Month, allowed wildcards [, - * /]
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="2">
-                周期从
+              Period from
                 <el-input-number v-model='cycle01' :min="1" :max="11" /> -
-                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="12" /> 月
+                <el-input-number v-model='cycle02' :min="cycle01 + 1" :max="12" /> month
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="3">
-                从
-                <el-input-number v-model='average01' :min="1" :max="11" /> 月开始，每
-                <el-input-number v-model='average02' :min="1" :max="12 - average01" /> 月月执行一次
+                From
+                <el-input-number v-model='average01' :min="1" :max="11" /> month start, every
+                <el-input-number v-model='average02' :min="1" :max="12 - average01" /> month
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio v-model='radioValue' :value="4">
-                指定
-                <el-select clearable v-model="checkboxList" placeholder="可多选" multiple :multiple-limit="8">
+                Specify
+                <el-select clearable v-model="checkboxList" placeholder="Multiple selection available" multiple :multiple-limit="8">
                     <el-option v-for="item in monthList" :key="item.key" :label="item.value" :value="item.key" />
                 </el-select>
             </el-radio>
@@ -62,18 +62,18 @@ const average02 = ref(1)
 const checkboxList = ref([])
 const checkCopy = ref([1])
 const monthList = ref([
-    {key: 1, value: '一月'},
-    {key: 2, value: '二月'},
-    {key: 3, value: '三月'},
-    {key: 4, value: '四月'},
-    {key: 5, value: '五月'},
-    {key: 6, value: '六月'},
-    {key: 7, value: '七月'},
-    {key: 8, value: '八月'},
-    {key: 9, value: '九月'},
-    {key: 10, value: '十月'},
-    {key: 11, value: '十一月'},
-    {key: 12, value: '十二月'}
+    {key: 1, value: 'January'},
+    {key: 2, value: 'February'},
+    {key: 3, value: 'March'},
+    {key: 4, value: 'April'},
+    {key: 5, value: 'May'},
+    {key: 6, value: 'June'},
+    {key: 7, value: 'July'},
+    {key: 8, value: 'August'},
+    {key: 9, value: 'September'},
+    {key: 10, value: 'October'},
+    {key: 11, value: 'November'},
+    {key: 12, value: 'December'}
 ])
 const cycleTotal = computed(() => {
     cycle01.value = props.check(cycle01.value, 1, 11)

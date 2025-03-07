@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-tabs type="border-card">
-            <el-tab-pane label="秒" v-if="shouldHide('second')">
+            <el-tab-pane label="Second" v-if="shouldHide('second')">
                 <CrontabSecond
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -10,7 +10,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="分钟" v-if="shouldHide('min')">
+            <el-tab-pane label="Minute" v-if="shouldHide('min')">
                 <CrontabMin
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -19,7 +19,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="小时" v-if="shouldHide('hour')">
+            <el-tab-pane label="Hour" v-if="shouldHide('hour')">
                 <CrontabHour
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -28,7 +28,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="日" v-if="shouldHide('day')">
+            <el-tab-pane label="Day" v-if="shouldHide('day')">
                 <CrontabDay
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -37,7 +37,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="月" v-if="shouldHide('month')">
+            <el-tab-pane label="Month" v-if="shouldHide('month')">
                 <CrontabMonth
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -46,7 +46,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="周" v-if="shouldHide('week')">
+            <el-tab-pane label="Week" v-if="shouldHide('week')">
                 <CrontabWeek
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -55,7 +55,7 @@
                 />
             </el-tab-pane>
 
-            <el-tab-pane label="年" v-if="shouldHide('year')">
+            <el-tab-pane label="Year" v-if="shouldHide('year')">
                 <CrontabYear
                     @update="updateCrontabValue"
                     :check="checkNumber"
@@ -67,11 +67,11 @@
 
         <div class="popup-main">
             <div class="popup-result">
-                <p class="title">时间表达式</p>
+                <p class="title">Time Expression</p>
                 <table>
                     <thead>
                         <th v-for="item of tabTitles" :key="item">{{item}}</th>
-                        <th>Cron 表达式</th>
+                        <th>Cron Expression</th>
                     </thead>
                     <tbody>
                         <td>
@@ -112,9 +112,9 @@
             <CrontabResult :ex="crontabValueString"></CrontabResult>
 
             <div class="pop_btn">
-                <el-button type="primary" @click="submitFill">确定</el-button>
-                <el-button type="warning" @click="clearCron">重置</el-button>
-                <el-button @click="hidePopup">取消</el-button>
+                <el-button type="primary" @click="submitFill">Confirm</el-button>
+                <el-button type="warning" @click="clearCron">Reset</el-button>
+                <el-button @click="hidePopup">Cancel</el-button>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@ const props = defineProps({
         default: ""
     }
 })
-const tabTitles = ref(["秒", "分钟", "小时", "日", "月", "周", "年"])
+const tabTitles = ref(["Second", "Minute", "Hour", "Day", "Month", "Week", "Year"]);
 const tabActive = ref(0)
 const hideComponent = ref([])
 const expression = ref('')
@@ -174,11 +174,11 @@ function shouldHide(key) {
     return !(hideComponent.value && hideComponent.value.includes(key))
 }
 function resolveExp() {
-    // 反解析 表达式
+    // Reverse parse expression
     if (expression.value) {
         const arr = expression.value.split(/\s+/)
         if (arr.length >= 6) {
-            //6 位以上是合法表达式
+            // Expressions with 6 or more parts are valid
             let obj = {
                 second: arr[0],
                 min: arr[1],
@@ -193,21 +193,21 @@ function resolveExp() {
             }
         }
     } else {
-        // 没有传入的表达式 则还原
+        // If no expression is passed, restore
         clearCron()
     }
 }
-// tab切换值
+// Tab switch value
 function tabCheck(index) {
     tabActive.value = index
 }
-// 由子组件触发，更改表达式组成的字段值
+// Triggered by child component, change the field value of the expression
 function updateCrontabValue(name, value, from) {
     crontabValueObj.value[name] = value
 }
-// 表单选项的子组件校验数字格式（通过-props传递）
+// Validate number format for form options (passed via props)
 function checkNumber(value, minLimit, maxLimit) {
-    // 检查必须为整数
+    // Check must be an integer
     value = Math.floor(value)
     if (value < minLimit) {
         value = minLimit
@@ -216,17 +216,17 @@ function checkNumber(value, minLimit, maxLimit) {
     }
     return value
 }
-// 隐藏弹窗
+// Hide popup
 function hidePopup() {
     emit("hide")
 }
-// 填充表达式
+// Fill expression
 function submitFill() {
     emit("fill", crontabValueString.value)
     hidePopup()
 }
 function clearCron() {
-    // 还原选择项
+  // Restore selection
     crontabValueObj.value = {
         second: "*",
         min: "*",

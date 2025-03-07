@@ -15,7 +15,7 @@ const useUserStore = defineStore(
       permissions: []
     }),
     actions: {
-      // 登录
+      // Login
       login(userInfo) {
         const username = userInfo.username.trim()
         const password = userInfo.password
@@ -32,13 +32,13 @@ const useUserStore = defineStore(
           })
         })
       },
-      // 获取用户信息
+      // Get user information
       getInfo() {
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
             const user = res.user
             const avatar = (isEmpty(user.avatar)) ? defAva : user.avatar
-            if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+            if (res.roles && res.roles.length > 0) { // Verify that the returned roles is a non-empty array
               this.roles = res.roles
               this.permissions = res.permissions
             } else {
@@ -53,7 +53,7 @@ const useUserStore = defineStore(
           })
         })
       },
-      // 退出系统
+      // Logout system
       logOut() {
         return new Promise((resolve, reject) => {
           logout(this.token).then(() => {

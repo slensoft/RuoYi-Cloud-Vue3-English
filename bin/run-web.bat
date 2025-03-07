@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [信息] 使用 Vite 命令运行 Web 工程。
+echo [Info] Run the web project using the Vite command.
 echo.
 
 %~d0

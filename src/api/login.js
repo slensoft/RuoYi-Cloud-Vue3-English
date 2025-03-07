@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 登录方法
+// Login method
 export function login(username, password, code, uuid) {
   return request({
     url: '/auth/login',
@@ -13,7 +13,7 @@ export function login(username, password, code, uuid) {
   })
 }
 
-// 注册方法
+// Register method
 export function register(data) {
   return request({
     url: '/auth/register',
@@ -25,7 +25,7 @@ export function register(data) {
   })
 }
 
-// 刷新方法
+// Refresh method
 export function refreshToken() {
   return request({
     url: '/auth/refresh',
@@ -33,7 +33,7 @@ export function refreshToken() {
   })
 }
 
-// 获取用户详细信息
+// Get user details
 export function getInfo() {
   return request({
     url: '/system/user/getInfo',
@@ -41,7 +41,7 @@ export function getInfo() {
   })
 }
 
-// 退出方法
+// Logout method
 export function logout() {
   return request({
     url: '/auth/logout',
@@ -49,7 +49,7 @@ export function logout() {
   })
 }
 
-// 获取验证码
+// Get verification code
 export function getCodeImg() {
   return request({
     url: '/code',

@@ -1,13 +1,13 @@
 <template>
   <div class="top-right-btn" :style="style">
     <el-row>
-      <el-tooltip class="item" effect="dark" :content="showSearch ? '隐藏搜索' : '显示搜索'" placement="top" v-if="search">
+      <el-tooltip class="item" effect="dark" :content="showSearch ? 'Hide Search' : 'Show Search'" placement="top" v-if="search">
         <el-button circle icon="Search" @click="toggleSearch()" />
       </el-tooltip>
-      <el-tooltip class="item" effect="dark" content="刷新" placement="top">
+      <el-tooltip class="item" effect="dark" content="Refresh" placement="top">
         <el-button circle icon="Refresh" @click="refresh()" />
       </el-tooltip>
-      <el-tooltip class="item" effect="dark" content="显隐列" placement="top" v-if="columns">
+      <el-tooltip class="item" effect="dark" content="Show/Hide Columns" placement="top" v-if="columns">
         <el-button circle icon="Menu" @click="showColumn()" v-if="showColumnsType == 'transfer'"/>
         <el-dropdown trigger="click" :hide-on-click="false" style="padding-left: 12px" v-if="showColumnsType == 'checkbox'">
           <el-button circle icon="Menu" />
@@ -25,7 +25,7 @@
     </el-row>
     <el-dialog :title="title" v-model="open" append-to-body>
       <el-transfer
-        :titles="['显示', '隐藏']"
+        :titles="['Show', 'Hide']"
         v-model="value"
         :data="columns"
         @change="dataChange"
@@ -36,26 +36,26 @@
 
 <script setup>
 const props = defineProps({
-  /* 是否显示检索条件 */
+  /* Show Search Conditions */
   showSearch: {
     type: Boolean,
     default: true,
   },
-  /* 显隐列信息 */
+  /* Show/Hide Column Information */
   columns: {
     type: Array,
   },
-  /* 是否显示检索图标 */
+  /* Show Search Icon */
   search: {
     type: Boolean,
     default: true,
   },
-  /* 显隐列类型（transfer穿梭框、checkbox复选框） */
+  /* Show/Hide Column Type (transfer shuttle box, checkbox) */
   showColumnsType: {
     type: String,
     default: "checkbox",
   },
-  /* 右外边距 */
+  /* Right Margin */
   gutter: {
     type: Number,
     default: 10,
@@ -64,11 +64,11 @@ const props = defineProps({
 
 const emits = defineEmits(['update:showSearch', 'queryTable']);
 
-// 显隐数据
+// Show/Hide Data
 const value = ref([]);
-// 弹出层标题
-const title = ref("显示/隐藏");
-// 是否显示弹出层
+// Dialog Title
+const title = ref("Show/Hide");
+// Show Dialog
 const open = ref(false);
 
 const style = computed(() => {
@@ -79,17 +79,17 @@ const style = computed(() => {
   return ret;
 });
 
-// 搜索
+// Search
 function toggleSearch() {
   emits("update:showSearch", !props.showSearch);
 }
 
-// 刷新
+// Refresh
 function refresh() {
   emits("queryTable");
 }
 
-// 右侧列表元素变化
+// Right List Element Change
 function dataChange(data) {
   for (let item in props.columns) {
     const key = props.columns[item].key;
@@ -97,13 +97,13 @@ function dataChange(data) {
   }
 }
 
-// 打开显隐列dialog
+// Open Show/Hide Column Dialog
 function showColumn() {
   open.value = true;
 }
 
 if (props.showColumnsType == 'transfer') {
-  // 显隐列初始默认隐藏列
+  // Initial Default Hidden Columns
   for (let item in props.columns) {
     if (props.columns[item].visible === false) {
       value.value.push(parseInt(item));
@@ -111,7 +111,7 @@ if (props.showColumnsType == 'transfer') {
   }
 }
 
-// 勾选
+// Checkbox
 function checkboxChange(event, label) {
   props.columns.filter(item => item.label == label)[0].visible = event;
 }

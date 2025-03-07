@@ -26,17 +26,17 @@ router.beforeEach((to, from, next) => {
     } else {
       if (useUserStore().roles.length === 0) {
         isRelogin.show = true
-        // 判断当前用户是否已拉取完user_info信息
+        // Check if current user's user_info has been fetched
         useUserStore().getInfo().then(() => {
           isRelogin.show = false
           usePermissionStore().generateRoutes().then(accessRoutes => {
-            // 根据roles权限生成可访问的路由表
+            // Generate accessible route table based on roles permissions
             accessRoutes.forEach(route => {
               if (!isHttp(route.path)) {
-                router.addRoute(route) // 动态添加可访问路由表
+                router.addRoute(route) // Dynamically add accessible route table
               }
             })
-            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
+            next({ ...to, replace: true }) // Hack method to ensure addRoutes is completed
           })
         }).catch(err => {
           useUserStore().logOut().then(() => {
@@ -49,12 +49,12 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    // 没有token
+    // No token
     if (whiteList.indexOf(to.path) !== -1) {
-      // 在免登录白名单，直接进入
+      // In the whitelist, proceed directly
       next()
     } else {
-      next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+      next(`/login?redirect=${to.fullPath}`) // Otherwise redirect to login page
       NProgress.done()
     }
   }

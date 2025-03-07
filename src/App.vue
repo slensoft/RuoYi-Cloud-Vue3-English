@@ -8,7 +8,7 @@ import { handleThemeStyle } from '@/utils/theme'
 
 onMounted(() => {
   nextTick(() => {
-    // 初始化主题样式
+    // Initialize theme style
     handleThemeStyle(useSettingsStore().theme)
   })
 })

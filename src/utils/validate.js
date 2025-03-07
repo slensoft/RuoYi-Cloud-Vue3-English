@@ -1,5 +1,5 @@
 /**
- * 判断value字符串是否为空 
+ * Check if the value string is empty
  * @param {string} value
  * @returns {Boolean}
  */
@@ -11,7 +11,7 @@ export function isEmpty(value) {
 }
 
 /**
- * 判断url是否是http或https 
+ * Check if the URL starts with http or https
  * @param {string} url
  * @returns {Boolean}
  */
@@ -20,7 +20,7 @@ export function isHttp(url) {
 }
 
 /**
- * 判断path是否为外链
+ * Check if the path is an external link
  * @param {string} path
  * @returns {Boolean}
  */

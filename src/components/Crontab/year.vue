@@ -2,19 +2,19 @@
     <el-form>
         <el-form-item>
             <el-radio :value="1" v-model='radioValue'>
-                不填，允许的通配符[, - * /]
+              Not filled, allowed wildcards [, - * /]
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio :value="2" v-model='radioValue'>
-                每年
+              Every year
             </el-radio>
         </el-form-item>
 
         <el-form-item>
             <el-radio :value="3" v-model='radioValue'>
-                周期从
+              Period from
                 <el-input-number v-model='cycle01' :min='fullYear' :max="2098"/> -
                 <el-input-number v-model='cycle02' :min="cycle01 ? cycle01 + 1 : fullYear + 1" :max="2099"/>
             </el-radio>
@@ -22,17 +22,17 @@
 
         <el-form-item>
             <el-radio :value="4" v-model='radioValue'>
-                从
-                <el-input-number v-model='average01' :min='fullYear' :max="2098"/> 年开始，每
-                <el-input-number v-model='average02' :min="1" :max="2099 - average01 || fullYear"/> 年执行一次
+              From
+                <el-input-number v-model='average01' :min='fullYear' :max="2098"/> year start, every
+                <el-input-number v-model='average02' :min="1" :max="2099 - average01 || fullYear"/> year
             </el-radio>
 
         </el-form-item>
 
         <el-form-item>
             <el-radio :value="5" v-model='radioValue'>
-                指定
-                <el-select clearable v-model="checkboxList" placeholder="可多选" multiple :multiple-limit="8">
+              Specify
+                <el-select clearable v-model="checkboxList" placeholder="Multiple selection available" multiple :multiple-limit="8">
                     <el-option v-for="item in 9" :key="item" :value="item - 1 + fullYear" :label="item -1 + fullYear" />
                 </el-select>
             </el-radio>

@@ -1,14 +1,14 @@
 <template>
   <div class="login">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">RuoYi Admin System</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
           type="text"
           size="large"
           auto-complete="off"
-          placeholder="账号"
+          placeholder="Username"
         >
           <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
         </el-input>
@@ -19,7 +19,7 @@
           type="password"
           size="large"
           auto-complete="off"
-          placeholder="密码"
+          placeholder="Password"
           @keyup.enter="handleLogin"
         >
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
@@ -30,7 +30,7 @@
           v-model="loginForm.code"
           size="large"
           auto-complete="off"
-          placeholder="验证码"
+          placeholder="Verification Code"
           style="width: 63%"
           @keyup.enter="handleLogin"
         >
@@ -40,7 +40,7 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">Remember Password</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -49,15 +49,15 @@
           style="width:100%;"
           @click.prevent="handleLogin"
         >
-          <span v-if="!loading">登 录</span>
-          <span v-else>登 录 中...</span>
+          <span v-if="!loading">Login</span>
+          <span v-else>Logging in...</span>
         </el-button>
         <div style="float: right;" v-if="register">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+          <router-link class="link-type" :to="'/register'">Register Now</router-link>
         </div>
       </el-form-item>
     </el-form>
-    <!--  底部  -->
+    <!--  Footer  -->
     <div class="el-login-footer">
       <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span>
     </div>
@@ -84,16 +84,16 @@ const loginForm = ref({
 });
 
 const loginRules = {
-  username: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
-  password: [{ required: true, trigger: "blur", message: "请输入您的密码" }],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+  username: [{ required: true, trigger: "blur", message: "Please enter your username" }],
+  password: [{ required: true, trigger: "blur", message: "Please enter your password" }],
+  code: [{ required: true, trigger: "change", message: "Please enter verification code" }]
 };
 
 const codeUrl = ref("");
 const loading = ref(false);
-// 验证码开关
+// Captcha switch
 const captchaEnabled = ref(true);
-// 注册开关
+// Registration switch
 const register = ref(false);
 const redirect = ref(undefined);
 
@@ -105,18 +105,18 @@ function handleLogin() {
   proxy.$refs.loginRef.validate(valid => {
     if (valid) {
       loading.value = true;
-      // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
+      // If remember password is checked, set username and password in cookies
       if (loginForm.value.rememberMe) {
         Cookies.set("username", loginForm.value.username, { expires: 30 });
         Cookies.set("password", encrypt(loginForm.value.password), { expires: 30 });
         Cookies.set("rememberMe", loginForm.value.rememberMe, { expires: 30 });
       } else {
-        // 否则移除
+        // Otherwise remove them
         Cookies.remove("username");
         Cookies.remove("password");
         Cookies.remove("rememberMe");
       }
-      // 调用action的登录方法
+      // Call login method from action
       userStore.login(loginForm.value).then(() => {
         const query = route.query;
         const otherQueryParams = Object.keys(query).reduce((acc, cur) => {
@@ -128,7 +128,7 @@ function handleLogin() {
         router.push({ path: redirect.value || "/", query: otherQueryParams });
       }).catch(() => {
         loading.value = false;
-        // 重新获取验证码
+        // Get new verification code
         if (captchaEnabled.value) {
           getCode();
         }

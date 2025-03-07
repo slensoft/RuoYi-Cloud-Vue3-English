@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询生成表数据
+// Query generated table data
 export function listTable(query) {
   return request({
     url: '/code/gen/list',
@@ -8,7 +8,8 @@ export function listTable(query) {
     params: query
   })
 }
-// 查询db数据库列表
+
+// Query database list
 export function listDbTable(query) {
   return request({
     url: '/code/gen/db/list',
@@ -17,7 +18,7 @@ export function listDbTable(query) {
   })
 }
 
-// 查询表详细信息
+// Get table details
 export function getGenTable(tableId) {
   return request({
     url: '/code/gen/' + tableId,
@@ -25,7 +26,7 @@ export function getGenTable(tableId) {
   })
 }
 
-// 修改代码生成信息
+// Update code generation information
 export function updateGenTable(data) {
   return request({
     url: '/code/gen',
@@ -34,7 +35,7 @@ export function updateGenTable(data) {
   })
 }
 
-// 导入表
+// Import table
 export function importTable(data) {
   return request({
     url: '/code/gen/importTable',
@@ -43,7 +44,7 @@ export function importTable(data) {
   })
 }
 
-// 预览生成代码
+// Preview generated code
 export function previewTable(tableId) {
   return request({
     url: '/code/gen/preview/' + tableId,
@@ -51,7 +52,7 @@ export function previewTable(tableId) {
   })
 }
 
-// 删除表数据
+// Delete table data
 export function delTable(tableId) {
   return request({
     url: '/code/gen/' + tableId,
@@ -59,7 +60,7 @@ export function delTable(tableId) {
   })
 }
 
-// 生成代码（自定义路径）
+// Generate code (custom path)
 export function genCode(tableName) {
   return request({
     url: '/code/gen/genCode/' + tableName,
@@ -67,7 +68,7 @@ export function genCode(tableName) {
   })
 }
 
-// 同步数据库
+// Synchronize database
 export function synchDb(tableName) {
   return request({
     url: '/code/gen/synchDb/' + tableName,
