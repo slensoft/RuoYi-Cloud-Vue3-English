@@ -78,7 +78,7 @@
 
       <!-- Add or Edit Department Dialog -->
       <el-dialog :title="title" v-model="open" width="600px" append-to-body>
-         <el-form ref="deptRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="deptRef" :model="form" :rules="rules" label-width="160px">
             <el-row>
                <el-col :span="24" v-if="form.parentId !== 0">
                   <el-form-item label="Parent Department" prop="parentId">

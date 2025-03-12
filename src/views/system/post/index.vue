@@ -111,7 +111,7 @@
 
       <!-- Add or modify post dialog -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-         <el-form ref="postRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="postRef" :model="form" :rules="rules" label-width="160px">
             <el-form-item label="Post Name" prop="postName">
                <el-input v-model="form.postName" placeholder="Please enter post name" />
             </el-form-item>

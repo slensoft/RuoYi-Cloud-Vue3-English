@@ -126,7 +126,7 @@
 
       <!-- Add or Edit Parameter Configuration Dialog -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-         <el-form ref="dataRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="dataRef" :model="form" :rules="rules" label-width="160px">
             <el-form-item label="Dictionary Type">
                <el-input v-model="form.dictType" :disabled="true" />
             </el-form-item>

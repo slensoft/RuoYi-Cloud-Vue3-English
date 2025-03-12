@@ -141,7 +141,7 @@
 
       <!-- Add or modify role configuration dialog -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-         <el-form ref="roleRef" :model="form" :rules="rules" label-width="100px">
+         <el-form ref="roleRef" :model="form" :rules="rules" label-width="160px">
             <el-form-item label="Role Name" prop="roleName">
                <el-input v-model="form.roleName" placeholder="Please enter role name" />
             </el-form-item>
@@ -197,7 +197,7 @@
 
       <!-- Assign role data permissions dialog -->
       <el-dialog :title="title" v-model="openDataScope" width="500px" append-to-body>
-         <el-form :model="form" label-width="80px">
+         <el-form :model="form" label-width="160px">
             <el-form-item label="Role Name">
                <el-input v-model="form.roleName" :disabled="true" />
             </el-form-item>

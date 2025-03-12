@@ -131,7 +131,7 @@
 
       <!-- Add or Edit Parameter Configuration Dialog -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-         <el-form ref="configRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="configRef" :model="form" :rules="rules" label-width="160px">
             <el-form-item label="Parameter Name" prop="configName">
                <el-input v-model="form.configName" placeholder="Please enter parameter name" />
             </el-form-item>

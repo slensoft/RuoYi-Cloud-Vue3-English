@@ -141,7 +141,7 @@
 
       <!-- Add or Edit Parameter Configuration Dialog -->
       <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-         <el-form ref="dictRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="dictRef" :model="form" :rules="rules" label-width="160px">
             <el-form-item label="Dictionary Name" prop="dictName">
                <el-input v-model="form.dictName" placeholder="Please enter dictionary name" />
             </el-form-item>

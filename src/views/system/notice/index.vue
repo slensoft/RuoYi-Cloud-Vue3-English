@@ -111,7 +111,7 @@
 
       <!-- Dialog box for adding or modifying announcements -->
       <el-dialog :title="title" v-model="open" width="780px" append-to-body>
-         <el-form ref="noticeRef" :model="form" :rules="rules" label-width="80px">
+         <el-form ref="noticeRef" :model="form" :rules="rules" label-width="160px">
             <el-row>
                <el-col :span="12">
                   <el-form-item label="Notice Title" prop="noticeTitle">

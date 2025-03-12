@@ -180,7 +180,7 @@
 
       <!-- Add or modify user configuration dialog -->
       <el-dialog :title="title" v-model="open" width="600px" append-to-body>
-         <el-form :model="form" :rules="rules" ref="userRef" label-width="80px">
+         <el-form :model="form" :rules="rules" ref="userRef" label-width="160px">
             <el-row>
                <el-col :span="12">
                   <el-form-item label="Nickname" prop="nickName">
