@@ -252,7 +252,7 @@ function resetQuery() {
 
 /** Preview button */
 function handlePreview(row) {
-  previewTable(row.tableName).then(response => {
+  previewTable(row.tableId).then(response => {
     preview.value.data = response.data;
     preview.value.open = true;
     preview.value.activeName = "domain.java";
@@ -275,7 +275,7 @@ function handleSelectionChange(selection) {
 /** Modify button operation */
 function handleEditTable(row) {
   const tableId = row.tableId || ids.value[0];
-  router.push({ path: "/tool/gen-edit/"+tableId, query: { pageNum: queryParams.value.pageNum } })
+  router.push({ path: "/tool/gen-edit/index/"+tableId, query: { pageNum: queryParams.value.pageNum } })
 }
 
 /** Delete button operation */
